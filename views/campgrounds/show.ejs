@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IIIThub</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">IIIThub</a>	
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<%if(!currentUser){%>
+					<li><a href="/login">Login</a></li>
+					<li><a href="/register">Sign up</a></li>
+				<%}else{%>
+					<li><a href="#"><%=currentUser.username%></a></li>
+					<li><a href="/logout">Logout</a></li>
+				<%}%>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+	<% if(error && error.length > 0){ %>
+	<div class="alert alert-danger" role="alert">
+		<%=error%>
+	</div>
+	<% } %>
+	<% if(success && success.length > 0){ %>
+	<div class="alert alert-success" role="alert">
+		<%=success%>
+	</div>
+	<% } %>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">IIIThub</p>
+			<div class="list-group">
+				<li class="list-group-item active">Overview</li>
+				<li class="list-group-item">Admission counselling group</li>
+				<li class="list-group-item">Official website</li>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img class="img-responsive" src="<%=campground.image%>">
+				<div class="caption-full">
+					<h4 class="pull-right">₹<%=campground.price%>/semester</h4>
+					<h4><a href=""><%=campground.name%></a></h4>
+					<p><%=campground.description%></p>
+					<p><em>Submitted by <%=campground.author.username%></em></p>
+					<p>
+						<%if(currentUser && campground.author.id.equals(currentUser._id)){%>
+						<a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
+						<form style="display:inline" method="POST" action="/campgrounds/<%=campground._id%>?_method=DELETE" >
+							<button class="btn btn-danger">DELETE</button>
+						</form>
+						<%}%>
+					</p>
+				</div>
+			</div>
+			<div class="well">
+				<div class="text-right">
+							<a href="/campgrounds/<%=campground._id%>/comments/new" class="btn btn-success">Add new comment</a>
+				</div>
+				<hr>
+					<% campground.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							<strong><%= comment.author.username %></strong>
+							<span class="pull-right">10 days ago</span>
+							<p>
+								<%= comment.text %>
+							</p>
+							<%if(currentUser && comment.author.id.equals(currentUser._id)){%>
+							<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">Edit</a>
+							<form action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+								<button id="delete" class="btn btn-xs btn-danger">DELETE</button>
+							</form>
+							<%}%>
+						</div>
+					</div>
+					<% }) %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>

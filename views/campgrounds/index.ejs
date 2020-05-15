@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IIIThub</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">IIIThub</a>	
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<%if(!currentUser){%>
+					<li><a href="/login">Login</a></li>
+					<li><a href="/register">Sign up</a></li>
+				<%}else{%>
+					<li><a href="#"><%=currentUser.username%></a></li>
+					<li><a href="/logout">Logout</a></li>
+				<%}%>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+	<% if(error && error.length > 0){ %>
+	<div class="alert alert-danger" role="alert">
+		<%=error%>
+	</div>
+	<% } %>
+	<% if(success && success.length > 0){ %>
+	<div class="alert alert-success" role="alert">
+		<%=success%>
+	</div>
+	<% } %>
+</div>
+
+
+<div class="container">
+<header class="jumbotron">
+	<div class="container">
+		<h1>Welcome to IIIThub!</h1>
+		<p>Know everything you need to know about all the IIITs in the country!</p>
+		<p><a href="/campgrounds/new" class="btn btn-primary btn-large">Add a new IIIT</a></p>
+	</div>
+</header>
+
+<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+	<% for(var i =0;i<campgrounds.length;i++){ %>
+<div class="col-md-3 col-sm-6">
+
+	<div class="thumbnail">
+
+	<img src= <%= campgrounds[i].image %> >
+	<div class="caption">
+	<h4><%= campgrounds[i].name %></h4></div>
+	<p>
+		<a href="/campgrounds/<%= campgrounds[i]._id %>" class="btn btn-primary">More Info</a>
+	</p>
+	</div>
+
+</div>
+<% } %>
+</div>
+
+
+
+</div>
+</body>
+</html>

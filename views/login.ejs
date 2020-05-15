@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IIIThub</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">IIIThub</a>	
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<%if(!currentUser){%>
+					<li><a href="/login">Login</a></li>
+					<li><a href="/register">Sign up</a></li>
+				<%}else{%>
+					<li><a href="#"><%=currentUser.username%></a></li>
+					<li><a href="/logout">Logout</a></li>
+				<%}%>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+	<% if(error && error.length > 0){ %>
+	<div class="alert alert-danger" role="alert">
+		<%=error%>
+	</div>
+	<% } %>
+	<% if(success && success.length > 0){ %>
+	<div class="alert alert-success" role="alert">
+		<%=success%>
+	</div>
+	<% } %>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<h1>Login Page!</h1>
+
+		<form method="post" action="/login" id="dep">
+			<div class="form-group">
+				<input type="text" name="username" placeholder="username" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" placeholder="password" class="form-control">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-lg btn-primary btn-block">Login!</button>
+			</div>
+			
+			
+			
+		</form>
+	</div>
+</div>
+
+</body>
+</html>
