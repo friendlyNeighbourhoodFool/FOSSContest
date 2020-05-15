@@ -30,7 +30,7 @@ app.use(flash());
 //=================
 
 app.use(require("express-session")({
-	secret:"Medha is super hot!",
+	secret:"I love open source!",
 	resave:false,
 	saveUninitialized:false
 }));
