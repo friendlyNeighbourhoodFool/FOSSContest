@@ -1,5 +1,6 @@
 # FOSSContest
 
+Link to the hosted web page:- https://vast-bayou-47043.herokuapp.com/
 This project is an idea in which this website will bring together, information about all the IIITs and their amazing information ,in one place.
 ****This project is inspired from IIITian Community***
 At present it is equipped with:-
